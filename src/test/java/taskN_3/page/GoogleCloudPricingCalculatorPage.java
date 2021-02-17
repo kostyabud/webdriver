@@ -24,7 +24,7 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement setAddGPU;
     @FindBy (xpath = "//*[@id='select_value_label_392']/span[2]")
     private WebElement getChooseNumberOfGPU;
-    @FindBy (xpath = "//*[@id='select_option_410']/div[1]")
+    @FindBy (xpath = "//*[@id=\"select_option_399\"]/div[1]")
     private WebElement setNumberOfGPU;
     @FindBy (xpath = "//*[@id='select_value_label_393']/span[2]")
     private WebElement getChooseGPUType;
@@ -42,6 +42,8 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement chooseCommittedUsage;
     @FindBy (xpath = "//*[@id='select_option_97']/div[1]")
     private WebElement setCommittedUsage;
+    @FindBy (xpath = "//*[@id='mainForm']/div[2]/div/md-card/md-card-content/div/div[1]/form/div[15]/button")
+    private WebElement buttonAddToEstimate;
 
 
 
@@ -74,13 +76,16 @@ public class GoogleCloudPricingCalculatorPage {
     }
     public GoogleCloudPricingCalculatorPage pushAddGPU (){
         setAddGPU.click();
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions
+                        .presenceOfElementLocated(By.xpath("/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[9]/div[1]/div[1]/div[1]/md-input-container[1]/label")));
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage setupNumberOfGPU(){
         getChooseNumberOfGPU.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("*[@id='select_option_410']/div[1]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body")));
         setNumberOfGPU.click();
         return this;
     }
@@ -112,6 +117,10 @@ public class GoogleCloudPricingCalculatorPage {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='select_option_97']/div[1]")));
         setCommittedUsage.click();
+        return this;
+    }
+    public GoogleCloudPricingCalculatorPage clickAddToEstimate(){
+        buttonAddToEstimate.click();
         return this;
     }
 
