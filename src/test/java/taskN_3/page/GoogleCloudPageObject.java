@@ -19,7 +19,7 @@ public class GoogleCloudPageObject {
     @FindBy (xpath = "//input[@name='q']")
     private WebElement searchTerm;
 
-    @FindBy (xpath = "//b[text()='Google Cloud Platform Pricing Calculator']")
+    @FindBy (xpath = "//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b")
     private WebElement resultSearch;
     //b[text()='Google Cloud Platform Pricing Calculator']
     public GoogleCloudPageObject(WebDriver driver){
@@ -35,11 +35,10 @@ public class GoogleCloudPageObject {
         searchTerm.sendKeys(text);
         searchTerm.sendKeys(Keys.RETURN);
         new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//b[text()='Google Cloud Platform Pricing Calculator']")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b")));
         return new GoogleCloudPageObject(driver);
     }
     public GoogleCloudPricingCalculatorPage openPagePricingCalculator(){
-      resultSearch =  driver.findElement((By.xpath("//b[text()='Google Cloud Platform Pricing Calculator']")));
       resultSearch.click();
         return new GoogleCloudPricingCalculatorPage(driver);
     }
