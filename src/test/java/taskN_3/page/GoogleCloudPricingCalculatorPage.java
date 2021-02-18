@@ -14,7 +14,7 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement numberOfInstances;
     @FindBy (xpath = "//md-select[@placeholder='Series']/descendant-or-self::md-select-value")
     private WebElement buttonSeriesMF;
-    @FindBy (xpath = "//md-option[@value='n1']")
+    @FindBy (xpath = "//md-option[@value='n1']/div")
     private WebElement setFamilyMachine;
     @FindBy (xpath = "//md-select[@placeholder='Instance type']")
     private WebElement chooseMachineType;
@@ -44,7 +44,8 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement setCommittedUsage;
 @FindBy (xpath = "//button[@aria-label='Add to Estimate']")
     private WebElement buttonAddToEstimate;
-
+    @FindBy (xpath = "//button[@id='email_quote']")
+    private WebElement buttonEmailEstimate;
 
 
 
@@ -61,16 +62,19 @@ public class GoogleCloudPricingCalculatorPage {
     }
 
     public GoogleCloudPricingCalculatorPage enterValueSeriesMachineFamily(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Series']/descendant::span")));
         buttonSeriesMF.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='n1']")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='n1']/div")));
         setFamilyMachine.click();
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage selectMachineType (){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Instance type']/descendant::span")));
         chooseMachineType.click();
-        setMachineType = driver.findElement(By.xpath("//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]"));
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]")));
         setMachineType.click();
         return this;
@@ -116,15 +120,21 @@ public class GoogleCloudPricingCalculatorPage {
         return this;
     }
     public GoogleCloudPricingCalculatorPage selectCommittedUsage(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Committed usage']/descendant::md-option[@ng-value='1' and @value='1']")));
         chooseCommittedUsage.click();
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']")));
-        setCommittedUsage = driver.findElement(By.xpath("//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']"));
         setCommittedUsage.click();
         return this;
     }
     public GoogleCloudPricingCalculatorPage clickAddToEstimate(){
         buttonAddToEstimate.click();
+        return this;
+    }
+
+    public GoogleCloudPricingCalculatorPage clickEmailEstimate(){
+        buttonEmailEstimate.click();
         return this;
     }
 
