@@ -87,9 +87,12 @@ public class TenMinuteMailPageObj {
        driver.switchTo().window(mailTab);
        new WebDriverWait(driver, 10)
                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='Google Cloud Sales '] ")));
-       driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+      JavascriptExecutor jse = (JavascriptExecutor)driver;
+      jse.executeScript("window.scroll(0,250)");
        new WebDriverWait(driver, 10)
                .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
+       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
        letterFromGoogle.click();
        return new TenMinuteMailPageObj(driver);

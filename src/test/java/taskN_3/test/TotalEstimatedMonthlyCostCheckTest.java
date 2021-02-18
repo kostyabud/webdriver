@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import taskN_3.page.GoogleCloudPageObject;
@@ -51,5 +52,10 @@ public class TotalEstimatedMonthlyCostCheckTest {
         String monthlyCostCheck = driver.findElement(By.xpath("//h3[text()='USD 1,082.77']")).getText();
         Assert.assertEquals(monthlyCostCheck,"USD 1,082.77");
 
+    }
+    @AfterMethod (alwaysRun = true)
+    public void closeBrowser() {
+        driver.quit();
+        driver = null;
     }
 }
