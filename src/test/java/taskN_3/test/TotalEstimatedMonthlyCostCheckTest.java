@@ -16,10 +16,12 @@ import taskN_3.page.GoogleCloudPricingCalculatorPage;
 import taskN_3.page.TenMinuteMailPageObj;
 
 public class TotalEstimatedMonthlyCostCheckTest {
+
     private WebDriver driver;
     private String searchTerms = "Google Cloud Platform Pricing Calculator";
     @BeforeMethod(alwaysRun = true)
     public void openPageGooglePricingCalculatorAndFillingForm (){
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
@@ -53,7 +55,7 @@ public class TotalEstimatedMonthlyCostCheckTest {
         Assert.assertEquals(monthlyCostCheck,"USD 1,082.77");
 
     }
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
         driver = null;

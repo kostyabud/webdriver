@@ -10,16 +10,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GoogleCloudPricingCalculatorPage {
     private WebDriver driver;
+    private final By downloadList = By.xpath("//div[@class='md-select-menu-container md-active md-clickable']");
     @FindBy (xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstances;
     @FindBy (xpath = "//md-select[@placeholder='Series']/descendant-or-self::md-select-value")
     private WebElement buttonSeriesMF;
-    @FindBy (xpath = "//md-option[@value='n1']/div")
-    private WebElement setFamilyMachine;
-    @FindBy (xpath = "//md-select[@placeholder='Instance type']")
-    private WebElement chooseMachineType;
-    @FindBy (xpath = "//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]")
-    private WebElement setMachineType;
+    private final By setSeriesFamilyMachine = By.xpath("//md-option[@value='n1']/div");
+    private final By chooseMachineType = By.xpath("//md-select[@placeholder='Instance type']");
+    private final By  setMachineType = By.xpath("//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]");
     @FindBy (xpath = "//md-checkbox[@aria-label='Add GPUs' and @ng-model='listingCtrl.computeServer.addGPUs']/child::div[@class='md-container md-ink-ripple']")
     private WebElement setAddGPU;
     @FindBy (xpath = "//md-select[@placeholder='Number of GPUs']/descendant::div")
@@ -28,21 +26,20 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement setNumberOfGPU;
     @FindBy (xpath = "//md-select[@placeholder='GPU type']/descendant::span[@class]")
     private WebElement getChooseGPUType;
-    @FindBy (xpath = "//md-option[@value='NVIDIA_TESLA_V100']/child::div[@class='md-text ng-binding']")
-    private WebElement setGPUType;
+    private final By  setGPUType = By.xpath("//md-option[@value='NVIDIA_TESLA_V100']/child::div[@class='md-text ng-binding']");
     @FindBy (xpath = "//md-select[@placeholder='Local SSD' and @ng-model='listingCtrl.computeServer.ssd']/descendant::span[@class]")
     private WebElement chooseCapacitySSD;
-@FindBy (xpath = "//md-option[@value='2' and @ng-repeat='item in listingCtrl.supportedSsd']/div[@class='md-text ng-binding']")
+    @FindBy (xpath = "//md-option[@value='2' and @ng-repeat='item in listingCtrl.supportedSsd']/div[@class='md-text ng-binding']")
     private WebElement setCapacitySSD;
-@FindBy (xpath = "//md-select[@placeholder='Datacenter location' and @ng-model='listingCtrl.computeServer.location']/descendant::span[@class]")
+    @FindBy (xpath = "//md-select[@placeholder='Datacenter location' and @ng-model='listingCtrl.computeServer.location']/descendant::span[@class]")
     private WebElement chooseDataCenterLocation;
-@FindBy (xpath = "//*[@id='select_option_205']/div[@class='md-text ng-binding']")
+    @FindBy (xpath = "//*[@id='select_option_205']/div[@class='md-text ng-binding']")
     private WebElement setDataCenterLocation;
-@FindBy (xpath = "//md-select[@placeholder='Committed usage' and @aria-label='Committed usage: None']/descendant::span")
+    @FindBy (xpath = "//md-select[@placeholder='Committed usage' and @aria-label='Committed usage: None']/descendant::span")
     private WebElement chooseCommittedUsage;
-@FindBy (xpath = "//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']")
+    @FindBy (xpath = "//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']")
     private WebElement setCommittedUsage;
-@FindBy (xpath = "//button[@aria-label='Add to Estimate']")
+    @FindBy (xpath = "//button[@aria-label='Add to Estimate']")
     private WebElement buttonAddToEstimate;
     @FindBy (xpath = "//button[@id='email_quote']")
     private WebElement buttonEmailEstimate;
@@ -66,17 +63,17 @@ public class GoogleCloudPricingCalculatorPage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Series']/descendant::span")));
         buttonSeriesMF.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='n1']/div")));
-        setFamilyMachine.click();
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
+        driver.findElement(setSeriesFamilyMachine).click();
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage selectMachineType (){
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Instance type']/descendant::span")));
-        chooseMachineType.click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]")));
-        setMachineType.click();
+                .until(ExpectedConditions.presenceOfElementLocated(chooseMachineType));
+        driver.findElement(chooseMachineType).click();
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(downloadList));
+        driver.findElement(setMachineType).click();
         return this;
     }
     public GoogleCloudPricingCalculatorPage pushAddGPU (){
@@ -88,34 +85,40 @@ public class GoogleCloudPricingCalculatorPage {
     }
 
     public GoogleCloudPricingCalculatorPage setupNumberOfGPU(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(getChooseNumberOfGPU));
         getChooseNumberOfGPU.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='1' and @ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']/div")));
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
         setNumberOfGPU.click();
         return this;
     }
     public GoogleCloudPricingCalculatorPage setupGPUType(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(getChooseGPUType));
         getChooseGPUType.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='NVIDIA_TESLA_V100']/child::div[@class='md-text ng-binding']")));
-        setGPUType.click();
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
+        driver.findElement(setGPUType).click();
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage installCapacitySSD(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(chooseCapacitySSD));
         chooseCapacitySSD.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='2' and @ng-repeat='item in listingCtrl.supportedSsd']/div[@class='md-text ng-binding']")));
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
         setCapacitySSD.click();
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage installDataCenterLocation(){
-        chooseDataCenterLocation.click();
-//        new WebDriverWait(driver, 10)
-//                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@id='select_92' and @aria-expanded='true']")));
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='select_option_205']/div[@class='md-text ng-binding']")));
+                .until(ExpectedConditions.elementToBeClickable(chooseDataCenterLocation));
+        chooseDataCenterLocation.click();
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
         setDataCenterLocation.click();
         return this;
     }
@@ -124,7 +127,7 @@ public class GoogleCloudPricingCalculatorPage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-select[@placeholder='Committed usage']/descendant::md-option[@ng-value='1' and @value='1']")));
         chooseCommittedUsage.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']")));
+                .until(ExpectedConditions.presenceOfElementLocated(downloadList));
         setCommittedUsage.click();
         return this;
     }

@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import taskN_3.page.GoogleCloudPageObject;
 import taskN_3.page.GoogleCloudPricingCalculatorPage;
-
+import taskN_3.page.GoogleCloudPageObject;
 
 
 public class TestGoogleCloudCalc {
@@ -15,6 +14,7 @@ public class TestGoogleCloudCalc {
     private String searchTerms = "Google Cloud Platform Pricing Calculator";
     @BeforeMethod (alwaysRun = true)
     public void openPageGooglePricingCalculatorAndFillingForm (){
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);

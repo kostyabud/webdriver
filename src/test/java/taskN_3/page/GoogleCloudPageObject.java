@@ -9,10 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GoogleCloudPageObject {
+
     private WebDriver driver;
     private static final String GOOGLE_CLOUD_URL = "https://cloud.google.com/";
 
