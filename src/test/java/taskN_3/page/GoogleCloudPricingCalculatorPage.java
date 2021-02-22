@@ -16,7 +16,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     private final By waitingButtonSeries = By.xpath("//md-select[@placeholder='Series']/descendant::span");
     private final By setSeriesFamilyMachine = By.xpath("//md-option[@value='n1']/div");
     private final By chooseMachineType = By.xpath("//md-select[@placeholder='Instance type']");
-    private final By  setMachineType = By.xpath("//md-option[@ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]");
+    private final By  setMachineType = By.xpath("//md-option[@id='select_option_360' and @ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]");
 
     @FindBy (xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstances;
@@ -76,6 +76,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
                 .until(ExpectedConditions.presenceOfElementLocated(chooseMachineType));
         driver.findElement(chooseMachineType).click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(downloadList));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(setMachineType));
         driver.findElement(setMachineType).click();
         return this;
     }

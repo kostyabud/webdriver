@@ -3,14 +3,44 @@ package taskN_3.test;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import taskN_3.driver.DriverSingleton;
+import taskN_3.page.GoogleCloudPageObject;
+import taskN_3.page.GoogleCloudPricingCalculatorPage;
+import taskN_3.page.TenMinuteMailPageObj;
+import taskN_3.util.TestListener;
 
+@Listeners({TestListener.class})
 public class CommonConditions {
     protected WebDriver driver;
-
+    private final String searchTerms = "Google Cloud Platform Pricing Calculator";
     @BeforeMethod()
     public void setup(){
         driver = DriverSingleton.getDriver();
+
+        GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
+        pageObject.openPage()
+                .enterSearchTerm(searchTerms)
+                .openPagePricingCalculator();
+        GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver);
+        calculatorPage
+                .enterValuesInstances(4)
+                .enterValueSeriesMachineFamily()
+                .selectMachineType()
+                .clickAddGPU()
+                .setupNumberOfGPU()
+                .setupGPUType()
+                .introduceCapacitySSD()
+                .chooseDataCenterLocation()
+                .selectCommittedUsage()
+                .clickAddToEstimate()
+                .clickEmailEstimate();
+        TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver);
+        email.openTempMail()
+                .selectTempMail()
+                .insertEmailToReceiveCost()
+                .clickButtonSendEmail()
+                .transitionToTempMailForAssert();
 
     }
 
