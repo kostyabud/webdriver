@@ -10,11 +10,13 @@ public class CreateNewPasteToPastebin {
     public  void testNewPast() throws InterruptedException {
       System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
+        String textPostForm = "Hello from WebDriver";
+        String nameOfTitle = "helloweb";
         CreatingNewPastePageObject pastebin = new CreatingNewPastePageObject(driver);
         pastebin.openPage()
-                .inputText("Hello from WebDriver")
+                .inputText(textPostForm)
                 .selectTenMinutesToPasteExpiration()
-                .enterTitleName("helloweb")
+                .enterTitleName(nameOfTitle)
                 .pushButtonCreateNewPaste();
 
             Thread.sleep(4000); //чтобы наглядно увидеть результат
