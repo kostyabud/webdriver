@@ -9,9 +9,12 @@ public class CommonConditions {
     protected WebDriver driver;
     protected static final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
 
+
+
     @BeforeMethod()
     public void setup(){
         driver = DriverSingleton.getDriver();
+
     }
 
     @AfterMethod(alwaysRun = true)

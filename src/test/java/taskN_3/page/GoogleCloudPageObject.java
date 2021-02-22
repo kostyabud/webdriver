@@ -13,12 +13,14 @@ public class GoogleCloudPageObject {
 
     private WebDriver driver;
     private static final String GOOGLE_CLOUD_URL = "https://cloud.google.com/";
+    private final By downloadResult = By.xpath("//div[@class='gsc-expansionArea']");
+    private final By downloadResultForTerm = By.xpath("//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b");
 
     @FindBy (xpath = "//input[@name='q']")
     private WebElement searchTerm;
 
     @FindBy (xpath = "//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b")
-    private WebElement resultSearch;
+    private WebElement resultSearchForTerm;
 
     public GoogleCloudPageObject(WebDriver driver){
         this.driver = driver;
@@ -36,10 +38,10 @@ public class GoogleCloudPageObject {
     }
     public GoogleCloudPricingCalculatorPage openPagePricingCalculator(){
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='gsc-expansionArea']")));
+                .until(ExpectedConditions.presenceOfElementLocated(downloadResult));
         new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b")));
-      resultSearch.click();
+                .until(ExpectedConditions.presenceOfElementLocated(downloadResultForTerm));
+        resultSearchForTerm.click();
         return new GoogleCloudPricingCalculatorPage(driver);
     }
 }

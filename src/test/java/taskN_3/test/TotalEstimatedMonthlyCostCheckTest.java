@@ -15,9 +15,10 @@ import taskN_3.page.GoogleCloudPageObject;
 import taskN_3.page.GoogleCloudPricingCalculatorPage;
 import taskN_3.page.TenMinuteMailPageObj;
 
-public class TotalEstimatedMonthlyCostCheckTest  extends CommonConditions{
+public class TotalEstimatedMonthlyCostCheckTest {
 
-
+    private WebDriver driver;
+    private String searchTerms = "Google Cloud Platform Pricing Calculator";
     @BeforeMethod(alwaysRun = true)
     public void openPageGooglePricingCalculatorAndFillingForm (){
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
@@ -25,27 +26,27 @@ public class TotalEstimatedMonthlyCostCheckTest  extends CommonConditions{
         driver.manage().window().maximize();
         GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
         pageObject.openPage()
-                .enterSearchTerm(SEARCH_TERM)
+                .enterSearchTerm(searchTerms)
                 .openPagePricingCalculator();
         GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver);
         calculatorPage
                 .enterValuesInstances(4)
                 .enterValueSeriesMachineFamily()
                 .selectMachineType()
-                .pushAddGPU()
+                .clickAddGPU()
                 .setupNumberOfGPU()
                 .setupGPUType()
-                .installCapacitySSD()
-                .installDataCenterLocation()
+                .introduceCapacitySSD()
+                .chooseDataCenterLocation()
                 .selectCommittedUsage()
                 .clickAddToEstimate()
                 .clickEmailEstimate();
         TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver);
-            email.openTempMail()
-            .selectTempMail()
-            .insertEmailToReceiveCost()
-            .clickButtonSendEmail()
-            .transitionToTempMailForAssert();
+        email.openTempMail()
+                .selectTempMail()
+                .insertEmailToReceiveCost()
+                .clickButtonSendEmail()
+                .transitionToTempMailForAssert();
     }
 
     @Test
