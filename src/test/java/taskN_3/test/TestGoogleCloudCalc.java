@@ -11,7 +11,8 @@ import taskN_3.page.GoogleCloudPageObject;
 
 public class TestGoogleCloudCalc {
     private WebDriver driver;
-    private String searchTerms = "Google Cloud Platform Pricing Calculator";
+    private final String searchTerms = "Google Cloud Platform Pricing Calculator";
+
     @BeforeMethod (alwaysRun = true)
     public void openPageGooglePricingCalculatorAndFillingForm (){
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
@@ -26,11 +27,11 @@ public class TestGoogleCloudCalc {
                 .enterValuesInstances(4)
                 .enterValueSeriesMachineFamily()
                 .selectMachineType()
-                .pushAddGPU()
+                .clickAddGPU()
                 .setupNumberOfGPU()
                 .setupGPUType()
-                .installCapacitySSD()
-                .installDataCenterLocation()
+                .introduceCapacitySSD()
+                .chooseDataCenterLocation()
                 .selectCommittedUsage()
                 .clickAddToEstimate();
 
@@ -40,44 +41,51 @@ public class TestGoogleCloudCalc {
     @Test
     public void comparisonOfTheReceivedPrice(){
         String manualCheck = "Total Estimated Cost: USD 1,082.77 per 1 month";
-        String automatedCheck = driver
-                .findElement(By.xpath("//h2[@class='md-title']/b")).getText();
+        String automatedCheck = driver.findElement(By.xpath("//h2[@class='md-title']/b")).getText();
+
         Assert.assertEquals(manualCheck, automatedCheck);
     }
 
     @Test
     public void testCorrectInstanceType(){
-        String instanceType = driver
-                .findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'Instance type: n1-standard-8')]")).getText();
-        Assert.assertEquals(instanceType, "Instance type: n1-standard-8");
+        String expectedInstanceType = "Instance type: n1-standard-8";
+        String instanceType = driver.findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'Instance type: n1-standard-8')]")).getText();
+
+        Assert.assertEquals(instanceType, expectedInstanceType);
     }
 
     @Test
     public void testCorrectRegion(){
         String region = driver
                 .findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'Region: Frankfurt')]")).getText();
-        Assert.assertEquals(region, "Region: Frankfurt");
+        String expectedRegion = "Region: Frankfurt";
+
+        Assert.assertEquals(region, expectedRegion);
     }
 
     @Test
     public void testCorrectLocalSSD(){
         String capacitySSD = driver
                 .findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'Total')]")).getText();
-        Assert.assertEquals(capacitySSD, "Total available local SSD space 2x375 GiB");
+      String expectedCapacitySSD = "Total available local SSD space 2x375 GiB";
+        Assert.assertEquals(capacitySSD, expectedCapacitySSD);
     }
 
     @Test
     public void testCorrectCommittedTerm(){
         String committedTerm = driver
                 .findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'Year')]")).getText();
-        Assert.assertEquals(committedTerm, "Commitment term: 1 Year");
+        String expectedCommittedTerm = "Commitment term: 1 Year";
+
+        Assert.assertEquals(committedTerm,expectedCommittedTerm );
     }
 
     @Test
     public void testCorrectVMClass(){
       String vmClass = driver.findElement(By.xpath("//div[@class='md-list-item-text ng-binding' and contains(text(),'VM class: regular')]"))
                 .getText();
-        Assert.assertEquals(vmClass, "VM class: regular");
+      String expectedVMClass = "VM class: regular";
+      Assert.assertEquals(vmClass, expectedVMClass);
 
     }
     @AfterMethod(alwaysRun = true)

@@ -24,7 +24,9 @@ public class TenMinuteMailPageObj {
    private WebElement buttonSendEmail;
    @FindBy (xpath = "//a[text()='Google Cloud Platform Price Estimate']")
    private WebElement letterFromGoogle;
-
+   private final By waitGeneratingMail = By.xpath("//input[@id='mail']");
+   private final By waitingButtonSendEmail = By.xpath("//button[@aria-label='Send Email']");
+   private final By mailWaiting = By.xpath("//span[@title='Google Cloud Sales '] ");
 
 
 
@@ -48,7 +50,7 @@ public class TenMinuteMailPageObj {
 
    public TenMinuteMailPageObj selectTempMail(){
        new WebDriverWait(driver, 10)
-               .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='mail']")));
+               .until(ExpectedConditions.presenceOfElementLocated(waitGeneratingMail));
        new WebDriverWait(driver, 20)
                .until(ExpectedConditions.elementToBeClickable(copyEmail));
        tempEmail.click();
@@ -74,7 +76,7 @@ public class TenMinuteMailPageObj {
    public TenMinuteMailPageObj clickButtonSendEmail(){
 
        new WebDriverWait(driver, 10)
-               .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@aria-label='Send Email']")));
+               .until(ExpectedConditions.presenceOfElementLocated(waitingButtonSendEmail));
        buttonSendEmail.click();
        return this;
    }
@@ -85,7 +87,7 @@ public class TenMinuteMailPageObj {
        String mailTab = String.valueOf(tabs.get(1));
        driver.switchTo().window(mailTab);
        new WebDriverWait(driver, 10)
-               .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='Google Cloud Sales '] ")));
+               .until(ExpectedConditions.presenceOfElementLocated(mailWaiting));
 
       JavascriptExecutor jse = (JavascriptExecutor)driver;
       jse.executeScript("window.scroll(0,250)");

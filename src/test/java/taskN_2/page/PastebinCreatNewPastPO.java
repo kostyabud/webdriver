@@ -14,53 +14,55 @@ public class PastebinCreatNewPastPO {
     private static final String HOME_URL = "https://pastebin.com";
     @FindBy(id = "postform-text")
     private WebElement inputText;
-    @FindBy(xpath = "//*[@id=\"w0\"]/div[5]/div[1]/div[1]/div/span/span[1]/span/span[2]")
+    @FindBy(xpath = "//*[@id='select2-postform-format-container']/following-sibling::*[@class='select2-selection__arrow']")
     private WebElement syntaxBash;
+
+    private final By additionalSelectionList = By.xpath("//ul[@class='select2-results__options']");
     @FindBy(xpath = "//li[text()='Bash']")
     private WebElement bashClick;
-    @FindBy(xpath = "//*[@id='w0']/div[5]/div[1]/div[2]/div/span/span[1]/span/span[2]")
-    private WebElement clickExpiration;
+    @FindBy(xpath = "//*[@id='select2-postform-expiration-container']/following-sibling::*[@class='select2-selection__arrow']")
+    private WebElement choiceExpiration;
     @FindBy(xpath = "//li[text()='10 Minutes']")
-    private WebElement choseTenMinutes;
+    private WebElement choiceTenMinutes;
     @FindBy(xpath = "//input[@id='postform-name']")
-    private WebElement installValueOfTitle;
+    private WebElement nameOfTitle;
     @FindBy(xpath = "//button[text()='Create New Paste']")
-    private WebElement pushCreateNewPaste;
+    private WebElement buttonCreateNewPaste;
 
 
     public PastebinCreatNewPastPO(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    public PastebinCreatNewPastPO openPage (){
+    public PastebinCreatNewPastPO openBrowser(){
         driver.get(HOME_URL);
         return this;
     }
-    public PastebinCreatNewPastPO fillingNewPaste(String text){
+    public PastebinCreatNewPastPO fillText(String text){
         inputText.sendKeys(text);
         return this;
     }
     public PastebinCreatNewPastPO choseSyntax (){
         syntaxBash.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='Bash']")));
+                .until(ExpectedConditions.presenceOfElementLocated(additionalSelectionList));
         bashClick.click();
         return this;
 
     }
-    public PastebinCreatNewPastPO installTenMinutesToPasteExpiration (){
-        clickExpiration.click();
+    public PastebinCreatNewPastPO chooseTenMinutesToPasteExpiration(){
+        choiceExpiration.click();
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='10 Minutes']")));
-        choseTenMinutes.click();
+                .until(ExpectedConditions.presenceOfElementLocated(additionalSelectionList));
+        choiceTenMinutes.click();
         return this;
     }
-    public PastebinCreatNewPastPO installTitle (String title){
-        installValueOfTitle.sendKeys(title);
+    public PastebinCreatNewPastPO introduceTitleName(String title){
+        nameOfTitle.sendKeys(title);
         return this;
     }
     public PastebinCreatNewPastPO pushButtonCreateNewPaste(){
-        pushCreateNewPaste.click();
+        buttonCreateNewPaste.click();
         return new PastebinCreatNewPastPO(driver);
     }
 

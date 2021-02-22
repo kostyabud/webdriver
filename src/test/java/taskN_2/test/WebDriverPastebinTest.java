@@ -17,19 +17,21 @@ public class WebDriverPastebinTest {
     private String textCode = "git config --global user.name  \"New Sheriff in Town\"\n" +
             "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
             "git push origin master --force";
+
     private String title = "how to gain dominance among developers";
-   private   PastebinCreatNewPastPO creatNewPastPO;
+    private   PastebinCreatNewPastPO creatNewPastPO;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup(){
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         creatNewPastPO = new PastebinCreatNewPastPO(driver);
-        creatNewPastPO.openPage()
-                .fillingNewPaste(textCode)
+        creatNewPastPO.openBrowser()
+                .fillText(textCode)
                 .choseSyntax()
-                .installTenMinutesToPasteExpiration()
-                .installTitle(title)
+                .chooseTenMinutesToPasteExpiration()
+                .introduceTitleName(title)
                 .pushButtonCreateNewPaste();
         new WebDriverWait(driver, 10).until(ExpectedConditions.titleContains(title));
 
@@ -42,14 +44,15 @@ public class WebDriverPastebinTest {
 
     @Test
     public void compareEnteredCodeWithReceived(){
-        Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div[1]/textarea"))
-                .getText(), textCode);
+        final String code = driver.findElement(By.xpath("//textarea[@class='textarea']")).getText();
+        Assert.assertEquals(code, textCode);
     }
 
     @Test
     public void assertSyntaxIsBash (){
-        Assert.assertEquals(driver.findElement(By.xpath("//ol[@class='bash']"))
-        .getAttribute("class"), "bash");
+        final String syntaxHighlighting = driver.findElement(By.xpath("//ol[@class='bash']"))
+                .getAttribute("class");
+        Assert.assertEquals(syntaxHighlighting, "bash");
 
     }
 
