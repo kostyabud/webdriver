@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleCloudPageObject {
+public class GoogleCloudPageObject extends AbstractPage {
 
-    private WebDriver driver;
+
     private static final String GOOGLE_CLOUD_URL = "https://cloud.google.com/";
     private final By downloadResult = By.xpath("//div[@class='gsc-expansionArea']");
     private final By downloadResultForTerm = By.xpath("//a[@class='gs-title' and contains(@data-ctorig,'calculator')]/child::b");
@@ -23,7 +23,7 @@ public class GoogleCloudPageObject {
     private WebElement resultSearchForTerm;
 
     public GoogleCloudPageObject(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
     public GoogleCloudPageObject openPage (){

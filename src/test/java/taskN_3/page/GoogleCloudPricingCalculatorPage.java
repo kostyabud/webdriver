@@ -8,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleCloudPricingCalculatorPage {
-    private WebDriver driver;
+public class GoogleCloudPricingCalculatorPage extends AbstractPage {
+
     private final By downloadList = By.xpath("//div[@class='md-select-menu-container md-active md-clickable']");
     private final By  setGPUType = By.xpath("//md-option[@value='NVIDIA_TESLA_V100']/child::div[@class='md-text ng-binding']");
     private final By waitingOptionChoose = By.xpath("//md-option[@value='1' and @ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']/div");
@@ -23,11 +23,11 @@ public class GoogleCloudPricingCalculatorPage {
     @FindBy (xpath = "//md-select[@placeholder='Series']/descendant-or-self::md-select-value")
     private WebElement buttonSeriesMF;
     @FindBy (xpath = "//md-checkbox[@aria-label='Add GPUs' and @ng-model='listingCtrl.computeServer.addGPUs']/child::div[@class='md-container md-ink-ripple']")
-    private WebElement setAddGPU;
+    private WebElement choiceAddGPU;
     @FindBy (xpath = "//md-select[@placeholder='Number of GPUs']/descendant::div")
-    private WebElement getChooseNumberOfGPU;
+    private WebElement listNumberOfGPU;
     @FindBy (xpath = "//md-option[@value='1' and @ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']/div")
-    private WebElement setNumberOfGPU;
+    private WebElement choiceNumberOfGPU;
     @FindBy (xpath = "//md-select[@placeholder='GPU type']/descendant::span[@class]")
     private WebElement getChooseGPUType;
     @FindBy (xpath = "//md-select[@placeholder='Local SSD' and @ng-model='listingCtrl.computeServer.ssd']/descendant::span[@class]")
@@ -50,7 +50,7 @@ public class GoogleCloudPricingCalculatorPage {
 
 
     public GoogleCloudPricingCalculatorPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -80,7 +80,7 @@ public class GoogleCloudPricingCalculatorPage {
         return this;
     }
     public GoogleCloudPricingCalculatorPage clickAddGPU(){
-        setAddGPU.click();
+        choiceAddGPU.click();
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(waitingOptionChoose));
         return this;
@@ -88,11 +88,11 @@ public class GoogleCloudPricingCalculatorPage {
 
     public GoogleCloudPricingCalculatorPage setupNumberOfGPU(){
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(getChooseNumberOfGPU));
-        getChooseNumberOfGPU.click();
+                .until(ExpectedConditions.elementToBeClickable(listNumberOfGPU));
+        listNumberOfGPU.click();
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(downloadList));
-        setNumberOfGPU.click();
+        choiceNumberOfGPU.click();
         return this;
     }
     public GoogleCloudPricingCalculatorPage setupGPUType(){

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
- public class TenMinuteMailPageObj {
-    private WebDriver driver;
+ public class TenMinuteMailPageObj  extends AbstractPage {
+
     private final String TEMP_MAIL_URL = "https://temp-mail.org/ru/";
 
     @FindBy (xpath = "//input[@id='mail']")
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 
     public TenMinuteMailPageObj (WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver,this);
     }
 

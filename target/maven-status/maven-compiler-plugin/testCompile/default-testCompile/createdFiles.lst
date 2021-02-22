@@ -1,0 +1,7 @@
+taskN_3\page\GoogleCloudPricingCalculatorPage.class
+taskN_3\test\TotalEstimatedMonthlyCostCheckTest.class
+taskN_3\driver\DriverSingleton.class
+taskN_3\page\GoogleCloudPageObject.class
+taskN_3\test\CommonConditions.class
+taskN_3\page\TenMinuteMailPageObj.class
+taskN_3\page\AbstractPage.class
