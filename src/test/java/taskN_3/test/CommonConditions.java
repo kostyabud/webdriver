@@ -15,15 +15,17 @@ public class CommonConditions {
     protected WebDriver driver;
     private final String searchTerms = "Google Cloud Platform Pricing Calculator";
     @BeforeMethod()
-    public void setup(){
+    public void setup() {
         driver = DriverSingleton.getDriver();
+    }
 
-        GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
-        pageObject.openPage()
+    public void setCalculatorPage() {
+          GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
+              pageObject.openPage()
                 .enterSearchTerm(searchTerms)
                 .openPagePricingCalculator();
-        GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver);
-        calculatorPage
+
+          GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver)
                 .enterValuesInstances(4)
                 .enterValueSeriesMachineFamily()
                 .selectMachineType()
@@ -35,15 +37,16 @@ public class CommonConditions {
                 .selectCommittedUsage()
                 .clickAddToEstimate()
                 .clickEmailEstimate();
-        TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver);
-        email.openTempMail()
+          TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver)
+                .openNewTab()
                 .selectTempMail()
                 .insertEmailToReceiveCost()
                 .clickButtonSendEmail()
                 .transitionToTempMailForAssert();
 
+
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void stopBrowser () {DriverSingleton.closeDriver();}
+//    @AfterMethod(alwaysRun = true)
+//    public void stopBrowser () {DriverSingleton.closeDriver();}
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import taskN_3.driver.DriverSingleton;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
     private WebElement letterFromGoogle;
     private final By waitGeneratingMail = By.xpath("//input[@id='mail']");
     private final By waitingButtonSendEmail = By.xpath("//button[@aria-label='Send Email']");
-    private final By mailWaiting = By.xpath("//span[@title='Google Cloud Sales '] ");
+
 
 
 
@@ -36,7 +37,7 @@ import java.util.concurrent.TimeUnit;
     }
 
 
-    public  TenMinuteMailPageObj openTempMail(){
+    public  TenMinuteMailPageObj openNewTab(){
 
         ((JavascriptExecutor)driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -66,8 +67,12 @@ import java.util.concurrent.TimeUnit;
 
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
+        WebElement element = driver.findElement(By.xpath("//button[@ng-disabled='emailForm.$invalid']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
+
+
 
         return new TenMinuteMailPageObj(driver);
 
@@ -86,16 +91,14 @@ import java.util.concurrent.TimeUnit;
         String estimateHandle = String.valueOf(tabs.get(0));
         String mailTab = String.valueOf(tabs.get(1));
         driver.switchTo().window(mailTab);
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(mailWaiting));
 
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scroll(0,250)");
+
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         letterFromGoogle.click();
+        jse.executeScript("window.scroll(0,500)");
         return new TenMinuteMailPageObj(driver);
 
     }

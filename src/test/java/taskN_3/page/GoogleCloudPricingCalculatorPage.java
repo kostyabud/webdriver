@@ -1,6 +1,7 @@
 package taskN_3.page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,10 +15,12 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     private final By  setGPUType = By.xpath("//md-option[@value='NVIDIA_TESLA_V100']/child::div[@class='md-text ng-binding']");
     private final By waitingOptionChoose = By.xpath("//md-option[@value='1' and @ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']/div");
     private final By waitingButtonSeries = By.xpath("//md-select[@placeholder='Series']/descendant::span");
-    private final By setSeriesFamilyMachine = By.xpath("//md-option[@value='n1']/div");
     private final By chooseMachineType = By.xpath("//md-select[@placeholder='Instance type']");
-    private final By  setMachineType = By.xpath("//md-option[@id='select_option_360' and @ng-repeat='instance in typeInfo']/div[contains(text(),'n1-standard-8')]");
+    private final By  setMachineType = By.xpath("//md-option[@id='select_option_360']/div");
 
+
+    @FindBy (xpath = "//md-option[@value='n1']/div")
+    private WebElement setSeriesFamilyMachine;
     @FindBy (xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstances;
     @FindBy (xpath = "//md-select[@placeholder='Series']/descendant-or-self::md-select-value")
@@ -58,29 +61,37 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
         numberOfInstances.sendKeys(number.toString());
+        WebElement element = driver.findElement(By.id("select_90"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage enterValueSeriesMachineFamily(){
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(waitingButtonSeries));
+                .until(ExpectedConditions.elementToBeClickable(waitingButtonSeries));
         buttonSeriesMF.click();
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(downloadList));
-        driver.findElement(setSeriesFamilyMachine).click();
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.visibilityOf(setSeriesFamilyMachine));
+       setSeriesFamilyMachine.click();
+        WebElement element = driver.findElement(By.id("select_90"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage selectMachineType (){
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(chooseMachineType));
+                .until(ExpectedConditions.elementToBeClickable(chooseMachineType));
         driver.findElement(chooseMachineType).click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(downloadList));
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(setMachineType));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(setMachineType));
         driver.findElement(setMachineType).click();
         return this;
     }
     public GoogleCloudPricingCalculatorPage clickAddGPU(){
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.visibilityOf(choiceAddGPU));
         choiceAddGPU.click();
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(waitingOptionChoose));
