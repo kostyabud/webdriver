@@ -19,13 +19,14 @@ public class CommonConditions {
         driver = DriverSingleton.getDriver();
     }
 
-    public void setCalculatorPage() {
-          GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
-              pageObject.openPage()
+    public void openPricingCalculator() {
+        GoogleCloudPageObject pageObject = new GoogleCloudPageObject(driver);
+        pageObject.openPage()
                 .enterSearchTerm(searchTerms)
                 .openPagePricingCalculator();
-
-          GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver)
+    }
+    public void fillFormToPricingCalculator() {
+        GoogleCloudPricingCalculatorPage calculatorPage = new GoogleCloudPricingCalculatorPage(driver)
                 .enterValuesInstances(4)
                 .enterValueSeriesMachineFamily()
                 .selectMachineType()
@@ -37,7 +38,9 @@ public class CommonConditions {
                 .selectCommittedUsage()
                 .clickAddToEstimate()
                 .clickEmailEstimate();
-          TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver)
+    }
+    public void getTempEmailAndReadLetter() {
+        TenMinuteMailPageObj email = new TenMinuteMailPageObj(driver)
                 .openNewTab()
                 .selectTempMail()
                 .insertEmailToReceiveCost()
@@ -47,6 +50,6 @@ public class CommonConditions {
 
     }
 
-//    @AfterMethod(alwaysRun = true)
-//    public void stopBrowser () {DriverSingleton.closeDriver();}
+    @AfterMethod(alwaysRun = true)
+    public void stopBrowser () {DriverSingleton.closeDriver();}
 }

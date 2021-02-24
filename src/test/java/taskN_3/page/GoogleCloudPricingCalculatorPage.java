@@ -18,7 +18,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     private final By chooseMachineType = By.xpath("//md-select[@placeholder='Instance type']/descendant::span[@class]");
     private final By  setMachineType = By.xpath("//md-option[@id='select_option_360']/div");
     private final By buttonGpu = By.id("select_90");
-
+    private  By elemForScroll = By.xpath("//md-select[@placeholder='VM Class']/descendant::span[@class]");
     @FindBy (xpath = "//md-option[@value='n1']/div")
     private WebElement setSeriesFamilyMachine;
     @FindBy (xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
@@ -69,7 +69,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(waitingButtonSeries));
         buttonSeriesMF.click();
-        WebElement element = driver.findElement(By.xpath("//md-select[@placeholder='VM Class']/descendant::span[@class]"));
+        WebElement element = driver.findElement(elemForScroll);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(downloadList));

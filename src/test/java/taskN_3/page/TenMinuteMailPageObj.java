@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
     private WebElement letterFromGoogle;
     private final By waitGeneratingMail = By.xpath("//input[@id='mail']");
     private final By waitingButtonSendEmail = By.xpath("//button[@aria-label='Send Email']");
-
+    private final By formEmail = By.xpath("//form[@name='emailForm']");
 
 
 
@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        WebElement element = driver.findElement(By.xpath("//form[@name='emailForm']"));
+        WebElement element = driver.findElement(formEmail);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
