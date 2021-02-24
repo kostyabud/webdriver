@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        WebElement element = driver.findElement(By.xpath("//button[@ng-disabled='emailForm.$invalid']"));
+        WebElement element = driver.findElement(By.xpath("//form[@name='emailForm']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
