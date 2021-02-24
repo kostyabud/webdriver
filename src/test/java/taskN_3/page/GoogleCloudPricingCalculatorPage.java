@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+
 public class GoogleCloudPricingCalculatorPage extends AbstractPage {
 
     private final By downloadList = By.xpath("//div[@class='md-select-menu-container md-active md-clickable']");
@@ -16,9 +18,9 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     private final By waitingOptionChoose = By.xpath("//md-option[@value='1' and @ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']/div");
     private final By waitingButtonSeries = By.xpath("//md-select[@placeholder='Series']/descendant::span[@class]");
     private final By chooseMachineType = By.xpath("//md-select[@placeholder='Instance type']/descendant::span[@class]");
-    private final By  setMachineType = By.xpath("//md-option[@id='select_option_360']/div");
-    private final By buttonGpu = By.id("select_90");
-    private  By elemForScroll = By.xpath("//md-select[@placeholder='VM Class']/descendant::span[@class]");
+    private final By  setMachineType = By.xpath("//*[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']");
+//    private final By buttonGpu = By.xpath("//*[@class='ng-scope layout-row']/descendant::div[@class='md-ripple-container']");
+    private final By elemForScroll = By.xpath("//md-select[@placeholder='VM Class']/descendant::span[@class]");
     @FindBy (xpath = "//md-option[@value='n1']/div")
     private WebElement setSeriesFamilyMachine;
     @FindBy (xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
@@ -39,11 +41,11 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     private WebElement setCapacitySSD;
     @FindBy (xpath = "//md-select[@placeholder='Datacenter location' and @ng-model='listingCtrl.computeServer.location']/descendant::span[@class]")
     private WebElement chooseDataCenterLocation;
-    @FindBy (xpath = "//*[@id='select_option_205']/div[@class='md-text ng-binding']")
+    @FindBy (xpath = "//*[@id=\"select_option_206\"]/div[contains(text(),'Frankfurt')]")
     private WebElement setDataCenterLocation;
     @FindBy (xpath = "//md-select[@placeholder='Committed usage' and @aria-label='Committed usage: None']/descendant::span")
     private WebElement choiceCommittedUsage;
-    @FindBy (xpath = "//md-option[@value='1' and @id='select_option_97']/child::div[@class='md-text']")
+    @FindBy (xpath = "//*[@id=\"select_option_98\"]/div[contains(text(),'1 Year')]")
     private WebElement setCommittedUsage;
     @FindBy (xpath = "//button[@aria-label='Add to Estimate']")
     private WebElement buttonAddToEstimate;
@@ -80,8 +82,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
     }
 
     public GoogleCloudPricingCalculatorPage selectMachineType (){
-        WebElement elementTwo = driver.findElement(buttonGpu);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", elementTwo);
+
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(chooseMachineType));
         driver.findElement(chooseMachineType).click();

@@ -16,7 +16,7 @@ public class TotalEstimatedMonthlyCostCheckTest extends CommonConditions{
         openPricingCalculator();
         fillFormToPricingCalculator();
         getTempEmailAndReadLetter();
-        String monthlyCostCheck = driver.findElement(By.xpath("//h3[text()='USD 1,082.77']")).getText();
+        String monthlyCostCheck = driver.findElement(By.xpath("//h3[contains(text(),'USD')]")).getText();
         String expectedMonthlyCost = "USD 1,082.77";
 
         Assert.assertEquals(monthlyCostCheck, expectedMonthlyCost);
