@@ -71,7 +71,7 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(waitingButtonSeries));
         buttonSeriesMF.click();
-        WebElement element1 = driver.findElement(By.xpath("//md-select[@ng-model='listingCtrl.computeServer.os']/descendant::span[@class]"));
+        WebElement element1 = driver.findElement(By.xpath("//md-option[@value='n1']/div"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element1);
 
         new WebDriverWait(driver, 10)
