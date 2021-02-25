@@ -92,14 +92,14 @@ import java.util.concurrent.TimeUnit;
         String mailTab = String.valueOf(tabs.get(1));
         driver.switchTo().window(mailTab);
 
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-        jse.executeScript("window.scroll(0,250)");
+//        JavascriptExecutor jse = (JavascriptExecutor)driver;
+//        jse.executeScript("window.scroll(0,250)");
 
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         letterFromGoogle.click();
-        jse.executeScript("window.scroll(0,500)");
+//        jse.executeScript("window.scroll(0,500)");
         return new TenMinuteMailPageObj(driver);
 
     }
