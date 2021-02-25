@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-02-24T19:27:11 MSK" name="Command line suite" finished-at="2021-02-24T19:27:47 MSK" duration-ms="35591">
+  <suite started-at="2021-02-25T10:33:11 MSK" name="Command line suite" finished-at="2021-02-25T10:34:08 MSK" duration-ms="56945">
     <groups>
     </groups>
-    <test started-at="2021-02-24T19:27:11 MSK" name="Command line test" finished-at="2021-02-24T19:27:47 MSK" duration-ms="35591">
+    <test started-at="2021-02-25T10:33:11 MSK" name="Command line test" finished-at="2021-02-25T10:34:08 MSK" duration-ms="56945">
       <class name="taskN_3.test.TotalEstimatedMonthlyCostCheckTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-24T19:27:11 MSK" name="setup" finished-at="2021-02-24T19:27:18 MSK" duration-ms="6686" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-25T10:33:11 MSK" name="setup" finished-at="2021-02-25T10:33:16 MSK" duration-ms="5527" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="test()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-24T19:27:18 MSK" name="test" finished-at="2021-02-24T19:27:45 MSK" duration-ms="27159" status="PASS">
+        <test-method signature="test()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-25T10:33:16 MSK" name="test" finished-at="2021-02-25T10:34:06 MSK" duration-ms="50180" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test -->
-        <test-method is-config="true" signature="stopBrowser()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-24T19:27:45 MSK" name="stopBrowser" finished-at="2021-02-24T19:27:47 MSK" duration-ms="1718" status="PASS">
+        <test-method is-config="true" signature="stopBrowser()[pri:0, instance:taskN_3.test.TotalEstimatedMonthlyCostCheckTest@10d59286]" started-at="2021-02-25T10:34:06 MSK" name="stopBrowser" finished-at="2021-02-25T10:34:08 MSK" duration-ms="1192" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- stopBrowser -->
