@@ -65,10 +65,10 @@ import java.util.concurrent.TimeUnit;
         String estimateHandle = String.valueOf(tabs.get(0));
         driver.switchTo().window(estimateHandle);
 
-//        driver.switchTo().frame(0);
-//        driver.switchTo().frame("myFrame");
-//        WebElement element = driver.findElement(formEmail);
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        driver.switchTo().frame(0);
+        driver.switchTo().frame("myFrame");
+        WebElement element = driver.findElement(formEmail);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
 
