@@ -97,6 +97,7 @@ import java.util.concurrent.TimeUnit;
 
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         letterFromGoogle.click();
 //        jse.executeScript("window.scroll(0,500)");
         return new TenMinuteMailPageObj(driver);
