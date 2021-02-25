@@ -67,9 +67,9 @@ import java.util.concurrent.TimeUnit;
 
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        WebElement element = driver.findElement(formEmail);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        insertEmail.click();
+//        WebElement element = driver.findElement(formEmail);
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+//        insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
 
 
@@ -99,7 +99,7 @@ import java.util.concurrent.TimeUnit;
                 .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         letterFromGoogle.click();
-//        jse.executeScript("window.scroll(0,500)");
+        jse.executeScript("window.scroll(0,500)");
         return new TenMinuteMailPageObj(driver);
 
     }
