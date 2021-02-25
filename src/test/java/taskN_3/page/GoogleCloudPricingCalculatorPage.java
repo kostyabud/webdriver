@@ -71,9 +71,9 @@ public class GoogleCloudPricingCalculatorPage extends AbstractPage {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(waitingButtonSeries));
         buttonSeriesMF.click();
-        WebElement element = driver.findElement(elemForScroll);
+//        WebElement element = driver.findElement(elemForScroll);
 //        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-//        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(downloadList));
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOf(setSeriesFamilyMachine));
