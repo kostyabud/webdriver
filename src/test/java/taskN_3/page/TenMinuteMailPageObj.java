@@ -67,8 +67,8 @@ import java.util.concurrent.TimeUnit;
 
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        WebElement element = driver.findElement(formEmail);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+//        WebElement element = driver.findElement(formEmail);
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         insertEmail.click();
         insertEmail.sendKeys(Keys.CONTROL+ "V");
 
@@ -92,13 +92,13 @@ import java.util.concurrent.TimeUnit;
         String mailTab = String.valueOf(tabs.get(1));
         driver.switchTo().window(mailTab);
 
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-        jse.executeScript("window.scroll(0,250)");
+//        JavascriptExecutor jse = (JavascriptExecutor)driver;
+//        jse.executeScript("window.scroll(0,250)");
 
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(letterFromGoogle));
         letterFromGoogle.click();
-        jse.executeScript("window.scroll(0,500)");
+//        jse.executeScript("window.scroll(0,500)");
         return new TenMinuteMailPageObj(driver);
 
     }
